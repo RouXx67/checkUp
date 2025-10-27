@@ -30,6 +30,11 @@ function stopMonitoring() {
 async function checkAllServices() {
   const db = getDatabase();
   
+  if (!db) {
+    console.error('Database not initialized yet, skipping service check');
+    return;
+  }
+  
   db.all('SELECT * FROM services', async (err, services) => {
     if (err) {
       console.error('Erreur lors de la récupération des services:', err);

@@ -15,10 +15,26 @@ const monitoringService = require('./backend/services/monitoring');
 const updateChecker = require('./backend/services/updateChecker');
 
 // Initialize database
-require('./backend/database/init');
+const { initDatabase } = require('./backend/database/init');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize database before starting services
+initDatabase().then(() => {
+  console.log('✅ Database initialized');
+  
+  // Start monitoring services after database is ready
+  console.log('🔍 Starting monitoring services...');
+  monitoringService.startMonitoring();
+  updateChecker.startUpdateChecker();
+  console.log('✅ Service de monitoring démarré (vérification toutes les 2 minutes)');
+  console.log('✅ Vérificateur de mises à jour démarré (vérification toutes les 6h)');
+  console.log('✅ Monitoring services started');
+}).catch(err => {
+  console.error('❌ Failed to initialize database:', err);
+  process.exit(1);
+});
 
 // Security middleware
 app.use(helmet({
@@ -90,12 +106,6 @@ const server = app.listen(PORT, () => {
     console.log(`🌐 Frontend: ${process.env.FRONTEND_URL || 'http://localhost:5173'}`);
     console.log(`🔧 API: http://localhost:${PORT}/api`);
   }
-  
-  // Start monitoring services
-  console.log('🔍 Starting monitoring services...');
-  monitoringService.startMonitoring();
-  updateChecker.startUpdateChecker();
-  console.log('✅ Monitoring services started');
 });
 
 // Graceful shutdown
