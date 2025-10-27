@@ -1,0 +1,92 @@
+{
+  "name": "checkup",
+  "version": "1.0.0",
+  "description": "Application web moderne de monitoring et de suivi des mises à jour",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "init-db": "node -e \"require('./backend/database/init.js')\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.jsx",
+    "docker:build": "docker build -t checkup .",
+    "docker:run": "docker run -p 3000:3000 checkup",
+    "docker:compose": "docker-compose up -d",
+    "docker:compose:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up"
+  },
+  "keywords": [
+    "monitoring",
+    "uptime",
+    "updates",
+    "docker",
+    "proxmox",
+    "github",
+    "notifications",
+    "dashboard"
+  ],
+  "author": "CheckUp Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "axios": "^1.6.0",
+    "nodemailer": "^6.9.7",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.52.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/CheckUp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/CheckUp/issues"
+  },
+  "homepage": "https://github.com/your-username/CheckUp#readme"
+  "name": "checkup",
+  "version": "1.0.0",
+  "description": "CheckUp - Monitoring et suivi des mises à jour pour votre infrastructure",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server.js",
+    "client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install"
+  },
+  "keywords": ["monitoring", "updates", "dashboard", "infrastructure"],
+  "author": "CheckUp Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.6",
+    "node-cron": "^3.0.3",
+    "axios": "^1.6.2",
+    "ws": "^8.14.2",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "concurrently": "^8.2.2"
+  }
+}
