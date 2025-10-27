@@ -176,4 +176,5 @@ router.get('/profile', authenticateToken, (req, res) => {
   );
 });
 
-module.exports = { router, authenticateToken };
+module.exports = router;
+module.exports.authenticateToken = authenticateToken;
